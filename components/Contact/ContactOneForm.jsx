@@ -18,8 +18,40 @@ const ContactOneForm = () => {
   const [fiziAmount, setFiziAmount] = useState(0);
   const [fiziPrice, setFiziPrice] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [isConnected, setIsConnected] = useState(false);
-  const [connectedAddress, setConnectedAddress] = useState("");
+const [isConnected, setIsConnected] = useState(false);
+
+
+  useEffect(() => {
+    const checkWallet = async () => {
+      if (window.ethereum && window.ethereum._metamask) {
+        try {
+          const accounts = await window.ethereum.request({
+            method: "eth_accounts",
+          });
+          if (accounts.length === 0) {
+            setIsConnected(false);
+          } else {
+            setIsConnected(true);
+          }
+        } catch (error) {
+          console.error("Error checking MetaMask lock status:", error);
+          setIsConnected(false);
+        }
+      } else {
+        console.error("MetaMask not detected");
+        setIsConnected(false);
+      }
+    };
+
+    checkWallet();
+
+    window.ethereum.on("chainChanged", checkWallet);
+
+    return () => {
+      window.ethereum.removeListener("chainChanged", checkWallet);
+    };
+  }, []);
+
 
   // Conversion rate: 1 BNB = 2 FIZI
   const bnbToFiziRatio = 2;
@@ -32,16 +64,9 @@ const ContactOneForm = () => {
     setFiziPrice(await getPrice());
   }
 
-  const handleConnectWallet = async () => {
-    const connectedAddress = await connectWallet();
-    if (connectedAddress) {
-      setConnectedAddress(connectedAddress);
-      setIsConnected(true);
-    }
-  };
 
   useEffect(() => {
-    handleConnectWallet();
+    // handleConnectWallet();
     instanciateContract();
     getFiziPrice();
   }, [isConnected]);
@@ -59,13 +84,13 @@ const ContactOneForm = () => {
   };
 
   const handleBnbAmountChange = async (event) => {
-    const bnbValue = parseFloat(event.target.value);
+    const bnbValue = event.target.value;
     setBnbAmount(bnbValue);
     setTimeout(async () => {
-      const fiziAmount = await getFiziAmountForBNB(event.target.value);
-      setFiziAmount(fiziAmount);
+        const fiziAmount = await getFiziAmountForBNB(event.target.value);
+        setFiziAmount(fiziAmount);
     }, 500);
-  };
+};
 
   const handleFiziAmountChange = (event) => {
     const fiziValue = parseFloat(event.target.value);
@@ -121,7 +146,7 @@ const ContactOneForm = () => {
               type="submit"
               disabled={loading}
               className="btn form-grp"
-              onClick={() => purchaseFizi(0, bnbAmount, setLoading)}
+              onClick={() => purchaseFizi(fiziAmount, bnbAmount, setLoading)}
             >
               Buy FIZI
             </button>

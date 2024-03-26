@@ -29,28 +29,29 @@ export async function connectWallet() {
 
 
 // Listen for the chainChanged event
-ethereum.on('chainChanged', instanciateContract);
+if (typeof ethereum !== 'undefined') {
+  ethereum.on('chainChanged', instanciateContract);
+}
 
 export async function instanciateContract() {
 
   const chainId = await ethereum.request({ method: 'eth_chainId' });
-  if (chainId !== '0x38') {
+  console.log(chainId)
+  if (chainId !== '0x61') {
       alert('Please connect to the correct network');
       return;
   }
 
   provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
-  const contractAddress = "0x3524BEE3d07c2CF98cE0AC5b84dC78d8cB0dF18B";
+  const contractAddress = "0xd6fa1eae0ec680f592788dcd6b9d9ea010e45e70";
   contract = new ethers.Contract(contractAddress, PresaleAbi, signer);
 }
 
 export async function getPrice() {
   try {
-    const provider = new ethers.providers.JsonRpcProvider(
-      "https://bsc-rpc.publicnode.com"
-    );
-    const contractAddress = "0x3524BEE3d07c2CF98cE0AC5b84dC78d8cB0dF18B";
+    const provider = new ethers.providers.JsonRpcProvider("https://97.rpc.thirdweb.com");
+    const contractAddress = "0xd6fa1eae0ec680f592788dcd6b9d9ea010e45e70";
     const contract = new ethers.Contract(contractAddress, PresaleAbi, provider);
     const fiziPrice =
       ethers.utils.formatEther(await contract.getPrice()) *
@@ -66,6 +67,10 @@ export async function getPrice() {
 }
 
 export async function getFiziAmountForBNB(bnbAmount) {
+  const provider = new ethers.providers.JsonRpcProvider("https://97.rpc.thirdweb.com");
+  const contractAddress = "0xd6fa1eae0ec680f592788dcd6b9d9ea010e45e70";
+  const contract = new ethers.Contract(contractAddress, PresaleAbi, provider);
+
   if (!contract) {
     console.error("Contract not initialized.");
     return;
@@ -86,24 +91,20 @@ export async function getFiziAmountForBNB(bnbAmount) {
   }
 }
 
-export async function purchaseFizi(tokenAmount, etherAmount, setLoading) {
-  if (!contract) {
+export async function purchaseFizi(tokenAmount, etherAmount, setLoading) { 
+   if (!contract) {
     console.error("Contract not initialized.");
     return;
   }
   try {
-    // Convert the Ether amount to Wei
     setLoading(true);
     const etherValue = ethers.utils.parseEther(etherAmount.toString());
-
-    // Call the purchase function of the contract
-    const tx = await contract.purchase(tokenAmount.toString(), {
+    const tx = await contract.purchase(ethers.utils.parseEther(tokenAmount.toString()), {
       value: etherValue,
     });
-
-    // Wait for the transaction to be mined
     await tx.wait();
     setLoading(false);
+
     return `Purchase successful with tx hash: ${tx.hash}`;
   } catch (error) {
     console.error("Error calling purchaseFizi:", error);
