@@ -51,13 +51,18 @@ const HeaderOne = () => {
       }
     };
 
+ 
     checkMetaMaskLock();
 
-    window.ethereum.on("accountsChanged", checkMetaMaskLock);
+    if (window.ethereum) {
 
-    return () => {
-      window.ethereum.removeListener("accountsChanged", checkMetaMaskLock);
-    };
+      window.ethereum.on("chainChanged", checkMetaMaskLock);
+
+      return () => {
+        window.ethereum.removeListener("chainChanged", checkMetaMaskLock);
+      };
+    }
+
   }, []);
 
   // sticky nav bar

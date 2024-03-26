@@ -45,11 +45,16 @@ const [isConnected, setIsConnected] = useState(false);
 
     checkWallet();
 
-    window.ethereum.on("chainChanged", checkWallet);
-
-    return () => {
-      window.ethereum.removeListener("chainChanged", checkWallet);
-    };
+    if (window.ethereum) {
+      window.ethereum.on("chainChanged", checkWallet);
+  
+      return () => {
+        // Also check here before removing the listener
+        if (window.ethereum) {
+          window.ethereum.removeListener("chainChanged", checkWallet);
+        }
+      };
+    }
   }, []);
 
 
