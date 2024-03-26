@@ -6,26 +6,31 @@ const CustomInputSelect = ({
   selectedCurrency,
   handleInputChange,
   handleCurrencyChange,
-  disabled
+  disabled,
 }) => {
   return (
     <div className={width}>
-      <div className="form-group">
-        <div className="input-group">
+      <div className="form-group d-flex justify-content-center">
+        <div className="input-group" style={{ width: "80%" }}>
           <input
             type="number"
             required
             value={amount}
             onChange={handleInputChange}
-            className="form-control form-grp"
+            style={{
+              width: "60%",
+              height: "50px",
+            }}
+            className="form-control form-grp bg-dark text-light"
             placeholder="Enter amount"
             disabled={disabled}
           />
           <select
             required
+            disabled={disabled}
             value={selectedCurrency}
             onChange={handleCurrencyChange}
-            className="form-control form-grp"
+            className="form-control form-grp bg-dark text-light"
           >
             <option value="" disabled>
               Select
