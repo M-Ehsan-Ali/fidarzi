@@ -21,36 +21,41 @@ const ContactOneForm = () => {
 const [isConnected, setIsConnected] = useState(false);
 
 
-  useEffect(() => {
-    const checkWallet = async () => {
-      if (window.ethereum && window.ethereum._metamask) {
-        try {
-          const accounts = await window.ethereum.request({
-            method: "eth_accounts",
-          });
-          if (accounts.length === 0) {
-            setIsConnected(false);
-          } else {
-            setIsConnected(true);
-          }
-        } catch (error) {
-          console.error("Error checking MetaMask lock status:", error);
+useEffect(() => {
+  const checkWallet = async () => {
+    if (window.ethereum && window.ethereum._metamask) {
+      try {
+        const accounts = await window.ethereum.request({
+          method: "eth_accounts",
+        });
+        if (accounts.length === 0) {
           setIsConnected(false);
+        } else {
+          setIsConnected(true);
         }
-      } else {
-        console.error("MetaMask not detected");
+      } catch (error) {
+        console.error("Error checking MetaMask lock status:", error);
         setIsConnected(false);
       }
-    };
+    } else {
+      console.error("MetaMask not detected");
+      setIsConnected(false);
+    }
+  };
 
-    checkWallet();
+  checkWallet();
 
+  if (window.ethereum) {
     window.ethereum.on("chainChanged", checkWallet);
 
     return () => {
-      window.ethereum.removeListener("chainChanged", checkWallet);
+      // Also check here before removing the listener
+      if (window.ethereum) {
+        window.ethereum.removeListener("chainChanged", checkWallet);
+      }
     };
-  }, []);
+  }
+}, []);
 
 
   // Conversion rate: 1 BNB = 2 FIZI
