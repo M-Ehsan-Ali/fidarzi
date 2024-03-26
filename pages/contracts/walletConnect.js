@@ -1,8 +1,10 @@
 import { ethers } from "ethers";
 import PresaleAbi from "./presaleAbi.json";
 import { getCryptoPrice } from "./utils";
+
 let provider;
 let contract;
+
 export async function connectWallet() {
   if (typeof window.ethereum !== "undefined") {
     try {
@@ -25,7 +27,18 @@ export async function connectWallet() {
   }
 }
 
+
+// Listen for the chainChanged event
+ethereum.on('chainChanged', instanciateContract);
+
 export async function instanciateContract() {
+
+  const chainId = await ethereum.request({ method: 'eth_chainId' });
+  if (chainId !== '0x38') {
+      alert('Please connect to the correct network');
+      return;
+  }
+
   provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
   const contractAddress = "0x3524BEE3d07c2CF98cE0AC5b84dC78d8cB0dF18B";
