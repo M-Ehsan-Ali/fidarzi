@@ -1,8 +1,8 @@
-import { shortenAddress } from "@/pages/contracts/utils";
+import { shortenAddress } from "@/lib/contracts/utils";
 import {
   connectWallet,
   instanciateContract,
-} from "@/pages/contracts/walletConnect";
+} from "@/lib/contracts/walletConnect";
 import cn from "classnames";
 import $ from "jquery";
 import Link from "next/link";

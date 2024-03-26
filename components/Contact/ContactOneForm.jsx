@@ -9,7 +9,7 @@ import {
   instanciateContract,
   provide,
   purchaseFizi,
-} from "@/pages/contracts/walletConnect";
+} from "@/lib/contracts/walletConnect";
 
 const ContactOneForm = () => {
   const [isMobile, setIsMobile] = useState(false);
