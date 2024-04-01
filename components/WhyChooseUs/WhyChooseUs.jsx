@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import LearnMoreButtton from "../LearnMoreButton/LearnMoreButtton";
 import SlickSlider from "../SlickSlider/SlickSlider";
 import WhyChooseUsItem from "./WhyChooseUsItem";
 
@@ -48,53 +49,37 @@ const WhyChooseUs = () => {
 
   const slider_items = [
     {
-      src: "/img/icon/choose_icon01.svg",
+      src: "/img/images/LOGO-1.png",
       alt: "",
-      link: "/",
-      title: "Mobile payment make easy",
-      description: "Add new, trending and rare artwork to your collection.",
+      link: "/home",
+      title: "Fidarzi App",
+      description:
+        "The Fidarzi App, our cornerstone platform, simplifies managing cryptocurrencies with services ranging from DeFi and CeFi wallets to P2P transfers and local currency payment options.",
     },
     {
-      src: "/img/icon/choose_icon02.svg",
+      src: "/img/images/Icon-a2.png",
       alt: "",
-      link: "/",
-      title: "Lifetime free transaction",
-      description: "Add new, trending and rare artwork to your collection.",
+      link: "/home",
+      title: "High Limit VIP Debit Card",
+      description:
+        "Our FIZI VIP High Limit Debit Card is a game-changer, rewarding token holders and enabling spending in crypto. With unparalleled monthly limits up to $175,000 USD and single transactions up to $150,000 USD in crypto, it’s potentially the highest limit card available.",
+      btn: "Launch FIZI CARD",
     },
     {
-      src: "/img/icon/choose_icon03.svg",
+      src: "/img/images/icon-a3.png",
       alt: "",
-      link: "/",
-      title: <>Protect the identity</>,
-      description: "Add new, trending and rare artwork to your collection.",
+      link: "/home",
+      title: <>Community & Rewards</>,
+      description:
+        "The Fidarzi ecosystem actively rewards community participation with the FIZI Rewards Hub. This includes cashback, special offers, and access to exclusive events, driven by our robust referral program.",
     },
     {
-      src: "/img/icon/choose_icon04.svg",
+      src: "/img/images/LOGO-1.png",
       alt: "",
-      link: "/",
+      link: "/home",
       title: "Sercurity & control over money",
-      description: "Add new, trending and rare artwork to your collection.",
-    },
-    {
-      src: "/img/icon/choose_icon01.svg",
-      alt: "",
-      link: "/",
-      title: "Lifetime free transaction",
-      description: "Add new, trending and rare artwork to your collection.",
-    },
-    {
-      src: "/img/icon/choose_icon03.svg",
-      alt: "",
-      link: "/",
-      title: <>Protect the identity</>,
-      description: "Add new, trending and rare artwork to your collection.",
-    },
-    {
-      src: "/img/icon/choose_icon04.svg",
-      alt: "",
-      link: "/",
-      title: "Sercurity & control over money",
-      description: "Add new, trending and rare artwork to your collection.",
+      description:
+        "FIZI Pay revolutionizes crypto payments for merchants and consumers, offering a wide range of payment options from off-ramping to prepaid cards, ensuring flexibility in transactions.",
     },
   ];
 
@@ -113,14 +98,11 @@ const WhyChooseUs = () => {
 
   return (
     <section className="choose-area pb-130">
-      <div className="container">
+      <div className="container mb-5">
         <div className="row justify-content-center">
           <div className="col-xl-6">
             <div className="section-title text-center mb-50">
-              <span className="sub-title">why Choose us </span>
-              <h2 className="title">
-                Why choose our bigtech <span>Token</span>
-              </h2>
+              <span className="sub-title">Solid App Functions</span>
             </div>
           </div>
         </div>
@@ -135,7 +117,7 @@ const WhyChooseUs = () => {
           </SlickSlider>
         </div>
 
-        <div className="slide-progressbar">
+        {/* <div className="slide-progressbar">
           <div
             style={{
               // width: `${count * toMultiply}%`,
@@ -143,7 +125,7 @@ const WhyChooseUs = () => {
             }}
             className="slide-filler"
           />
-        </div>
+        </div> */}
 
         {/* <div
           className="slide-progress"
@@ -154,6 +136,11 @@ const WhyChooseUs = () => {
           <span className="slider__label sr-only"></span>
         </div> */}
       </div>
+      <LearnMoreButtton
+        onClick={() => {
+          console.log("btn clicked");
+        }}
+      />
     </section>
   );
 };

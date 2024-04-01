@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
 import cn from "classnames";
 import $ from "jquery";
-import { useRouter } from "next/router";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 let flag = true;
 
@@ -40,7 +40,7 @@ const HeaderTwo = () => {
 
       //Mobile Nav Hide Show
       if ($(".mobile-menu").length) {
-        var mobileMenuContent = $(".menu-area .main-menu").html();
+        let mobileMenuContent = $(".menu-area .main-menu").html();
         $(".mobile-menu .menu-box .menu-outer").append(mobileMenuContent);
 
         //Dropdown Button
@@ -66,15 +66,6 @@ const HeaderTwo = () => {
     flag = false;
   }, []);
 
-  // scroll to element by id
-  const handleClickScroll = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      // 👇 Will scroll smoothly to the top of the next section
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   // active link switching
   const [hash, setHash] = useState("");
   const { asPath, pathname } = useRouter();
@@ -83,135 +74,54 @@ const HeaderTwo = () => {
     setHash(asPath.split("#")[1]);
   }, [asPath]);
 
-  const isActiveLink = (id) => {
-    return id == "#" + hash ? "active" : "";
-  };
-
   return (
     <header id="header">
-      <div
-        id="sticky-header"
-        className={cn(
-          "menu-area menu-style-two transparent-header",
-          stickyClass.header
-        )}
-      >
-        <div className="container custom-container-three">
+      <div id="header-fixed-height" className={cn(stickyClass.fixed)} />
+
+      <div id="sticky-header" className={cn("menu-area", stickyClass.header)}>
+        <div className={cn("container custom-container")}>
           <div className="row">
             <div className="col-12">
-              <div className="mobile-nav-toggler">
-                <i className="fas fa-bars"></i>
+              <div className={"mobile-nav-toggler"}>
+                <i className="fas fa-bars" />
               </div>
 
-              <div className="menu-wrap">
-                <nav className="menu-nav">
+              <div className="menu-wrap" style={{ padding: "20px 0" }}>
+                <nav className={"menu-nav"}>
                   <div className="logo">
-                    <Link href="/">
-                      <img src={"/img/logo/logo.png"} alt="" />
+                    <Link href={"/"}>
+                      <img
+                        src={"/img/logo/logo.png"}
+                        alt="Fidarzi Logo"
+                        style={{ width: 173 }}
+                      />
                     </Link>
                   </div>
-                  <div className="navbar-wrap main-menu d-none d-lg-flex">
-                    <ul className="navigation">
-                      <li
-                        className={cn(
-                          (!hash || hash == "header") && "active",
-                          " menu-item-has-children"
-                        )}
-                      >
-                        <Link
-                          href="#header"
-                          className="section-link"
-                          onClick={() => handleClickScroll("header")}
-                        >
+
+                  <div className={cn("navbar-wrap main-menu d-none d-lg-flex")}>
+                    <ul className={"navigation"}>
+                      <li className={cn(pathname === "/home" && "active")}>
+                        <Link href="/home" className={"section-link"}>
                           Home
                         </Link>
-                        <ul className={cn("sub-menu")}>
-                          <li className={cn(pathname == "/" && "active")}>
-                            <Link href="/">Home One</Link>
-                          </li>
-                          <li
-                            className={cn(pathname == "/home-two" && "active")}
-                          >
-                            <Link href="/home-two">Home Two</Link>
-                          </li>
-                        </ul>
                       </li>
-                      <li className={cn(hash == "about" && "active")}>
-                        <Link
-                          href="#about"
-                          className="section-link"
-                          onClick={() => handleClickScroll("about")}
-                        >
-                          About us
+                      <li className={cn(pathname === "/" && "active")}>
+                        <Link href="/" className={"section-link"}>
+                          Sales
                         </Link>
                       </li>
-                      <li className={isActiveLink("#roadmap")}>
-                        <Link
-                          href="#roadmap"
-                          className="section-link"
-                          onClick={() => handleClickScroll("roadmap")}
-                        >
-                          Roadmap
-                        </Link>
-                      </li>
-                      <li className={isActiveLink("#faq")}>
-                        <Link
-                          href="#faq"
-                          className="section-link"
-                          onClick={() => handleClickScroll("faq")}
-                        >
-                          Faq
-                        </Link>
-                      </li>
-                      <li className={"menu-item-has-children"}>
-                        <Link href="/blog">Blog</Link>
-                        <ul className={cn("sub-menu")}>
-                          <li className={cn(pathname == "/blog" && "active")}>
-                            <Link href="/blog">Our Blog</Link>
-                          </li>
-                          <li
-                            className={cn(
-                              pathname == "/blog/blog-details" && "active"
-                            )}
-                          >
-                            <Link href="/blog/blog-details">Blog Details</Link>
-                          </li>
-                        </ul>
-                      </li>
-                      <li className={isActiveLink("#contact")}>
-                        <Link
-                          href="#contact"
-                          className="section-link"
-                          onClick={() => handleClickScroll("contact")}
-                        >
-                          Contact us
+                      <li>
+                        <Link href="#" className={"section-link"}>
+                          Whitepaper
                         </Link>
                       </li>
                     </ul>
                   </div>
-                  <div className="header-action d-none d-md-block">
+                  <div className={cn("header-action", "d-none d-md-block")}>
                     <ul>
-                      <li className="header-lang">
-                        <span className="selected-lang">ENG</span>
-                        <ul className="lang-list">
-                          <li>
-                            <Link href="#">IND</Link>
-                          </li>
-                          <li>
-                            <Link href="#">BNG</Link>
-                          </li>
-                          <li>
-                            <Link href="#">TUR</Link>
-                          </li>
-                          <li>
-                            <Link href="#">CIN</Link>
-                          </li>
-                        </ul>
-                      </li>
-                      <li className="header-btn">
-                        <Link href="#" className="btn">
-                          Buy Now
-                        </Link>
+                      <li className={"header-btn"}>
+                        <button className="btn mx-3">FIZI CARD</button>
+                        <button className="btn">BUY Now</button>
                       </li>
                     </ul>
                   </div>
@@ -219,51 +129,70 @@ const HeaderTwo = () => {
               </div>
 
               {/* <!-- Mobile Menu  --> */}
-              <div className="mobile-menu">
-                <nav className="menu-box">
-                  <div className="close-btn">
+              <div className={"mobile-menu"}>
+                <nav className={"menu-box"}>
+                  <div className={"close-btn"}>
                     <i className="fas fa-times"></i>
                   </div>
-                  <div className="nav-logo">
+                  <div className={"nav-logo"}>
                     <Link href="/">
-                      <img src={"/img/logo/logo.png"} alt="" title="" />
+                      <img
+                        src={"/img/logo/logo.png"}
+                        alt="fidarzi Logo"
+                        title=""
+                      />
                     </Link>
                   </div>
-                  <div className="menu-outer">
-                    {/* <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header--> */}
+
+                  <div className={"menu-outer"}>
+                    {/* <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->  */}
+                    <ul className={"navigation"}>
+                      <li className={cn(hash == "connect" && "active")}>
+                        <Link href={""} className={"section-link"}>
+                          FIZI CARD
+                        </Link>
+                      </li>
+                      <li className={cn(hash == "connect" && "active")}>
+                        <Link href={""} className={"section-link"}>
+                          BUY Now
+                        </Link>
+                      </li>
+                    </ul>
                   </div>
-                  <div className="social-links">
+
+                  <div className={"social-links"}>
                     <ul className="clearfix">
                       <li>
-                        <Link href="#">
+                        <a href="#">
                           <i className="fab fa-facebook-f"></i>
-                        </Link>
+                        </a>
                       </li>
                       <li>
-                        <Link href="#">
+                        <a href="#">
                           <i className="fab fa-twitter"></i>
-                        </Link>
+                        </a>
                       </li>
                       <li>
-                        <Link href="#">
+                        <a href="#">
                           <i className="fab fa-instagram"></i>
-                        </Link>
+                        </a>
                       </li>
                       <li>
-                        <Link href="#">
+                        <a href="#">
                           <i className="fab fa-linkedin-in"></i>
-                        </Link>
+                        </a>
                       </li>
                       <li>
-                        <Link href="#">
+                        <a href="#">
                           <i className="fab fa-youtube"></i>
-                        </Link>
+                        </a>
                       </li>
                     </ul>
                   </div>
                 </nav>
               </div>
-              <div className="menu-backdrop"></div>
+
+              <div className={"menu-backdrop"} />
               {/* <!-- End Mobile Menu --> */}
             </div>
           </div>

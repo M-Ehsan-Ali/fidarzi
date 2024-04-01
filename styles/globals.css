@@ -1395,6 +1395,9 @@ label {
 .section-title .title span {
   color: #00c4f4;
 }
+.section-title span {
+  color: #00c4f4;
+}
 .about-content p {
   margin-bottom: 40px;
   width: 73%;
@@ -2855,15 +2858,7 @@ label {
   position: relative;
   margin-bottom: 30px;
 }
-.contact-info-item::before {
-  content: "";
-  position: absolute;
-  right: -61px;
-  top: 44px;
-  background-image: url(/img/images/line.png);
-  width: 122px;
-  height: 9px;
-}
+
 .contact-info-wrap .row [class*="col-"]:last-child .contact-info-item::before {
   display: none;
 }
@@ -3543,4 +3538,9 @@ label {
 }
 .bt-roadmap-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #ff0;
+}
+
+.vertical-line {
+  border-left: 1px solid #ff0; /* Change the color as needed */
+  height: 100vh;
 }

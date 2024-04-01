@@ -1,13 +1,10 @@
-import { shortenAddress } from "@/pages/contracts/utils";
-import {
-  connectWallet,
-  instanciateContract,
-} from "@/pages/contracts/walletConnect";
+import { shortenAddress } from "@/lib/contracts/utils";
+import { connectWallet } from "@/lib/contracts/walletConnect";
 import cn from "classnames";
 import $ from "jquery";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 let flag = true;
 
@@ -127,10 +124,6 @@ const HeaderOne = () => {
     setHash(asPath.split("#")[1]);
   }, [asPath]);
 
-  const isActiveLink = (id) => {
-    return id == "#" + hash ? "active" : "";
-  };
-
   return (
     <header id="header">
       <div id="header-fixed-height" className={cn(stickyClass.fixed)} />
@@ -149,7 +142,7 @@ const HeaderOne = () => {
                     <Link href={"/"}>
                       <img
                         src={"/img/logo/logo.png"}
-                        alt="BigTech Logo"
+                        alt="Fidarzi Logo"
                         style={{ width: 173 }}
                       />
                     </Link>
@@ -157,98 +150,25 @@ const HeaderOne = () => {
 
                   <div className={cn("navbar-wrap main-menu d-none d-lg-flex")}>
                     <ul className={"navigation"}>
-                      {/* <li
-                        className={cn(
-                          (!hash || hash == "header") && "active",
-                          "menu-item-has-children"
-                        )}
-                      >
-                        <Link
-                          href="#header"
-                          className={"section-link"}
-                          onClick={() => handleClickScroll("header")}
-                        >
+                      <li className={cn(pathname === "/home" && "active")}>
+                        <Link href="/home" className={"section-link"}>
                           Home
                         </Link>
-                        <ul className={cn("sub-menu")}>
-                          <li className={cn(pathname === "/" && "active")}>
-                            <Link href="/">Home One</Link>
-                          </li>
-                          <li
-                            className={cn(pathname == "/home-two" && "active")}
-                          >
-                            <Link href="/home-two">Home Two</Link>
-                          </li>
-                        </ul>
                       </li>
-                      <li className={cn(hash == "about" && "active")}>
-                        <Link
-                          href="#about"
-                          className={"section-link"}
-                          onClick={() => handleClickScroll("about")}
-                        >
-                          About us
-                        </Link>
-                      </li> */}
                       <li className={cn(pathname === "/" && "active")}>
                         <Link href="/" className={"section-link"}>
                           Sales
                         </Link>
                       </li>
-                      {/* <li className={isActiveLink("#roadmap")}>
-                        <Link
-                          href="#roadmap"
-                          className={"section-link"}
-                          onClick={() => handleClickScroll("roadmap")}
-                        >
-                          Roadmap
+                      <li>
+                        <Link href="#" className={"section-link"}>
+                          Whitepaper
                         </Link>
                       </li>
-                      <li className={"menu-item-has-children"}>
-                        <Link href="/blog">Blog</Link>
-                        <ul className={cn("sub-menu")}>
-                          <li className={cn(pathname == "/blog" && "active")}>
-                            <Link href="/blog">Our Blog</Link>
-                          </li>
-                          <li
-                            className={cn(
-                              pathname == "/blog/blog-details" && "active"
-                            )}
-                          >
-                            <Link href="/blog/blog-details">Blog Details</Link>
-                          </li>
-                        </ul>
-                      </li>
-                      <li className={isActiveLink("#contact")}>
-                        <Link
-                          href="#contact"
-                          className={"section-link"}
-                          onClick={() => handleClickScroll("contact")}
-                        >
-                          Contact us
-                        </Link>
-                      </li> */}
                     </ul>
                   </div>
                   <div className={cn("header-action", "d-none d-md-block")}>
                     <ul>
-                      {/* <li className={"header-lang"}>
-                        <span className={"selected-lang"}>ENG</span>
-                        <ul className={"lang-list"}>
-                          <li>
-                            <Link href="#">IND</Link>
-                          </li>
-                          <li>
-                            <Link href="#">BNG</Link>
-                          </li>
-                          <li>
-                            <Link href="#">TUR</Link>
-                          </li>
-                          <li>
-                            <Link href="#">CIN</Link>
-                          </li>
-                        </ul>
-                      </li> */}
                       <li className={"header-btn"}>
                         <button
                           disabled={loading}
@@ -275,7 +195,7 @@ const HeaderOne = () => {
                     <Link href="/">
                       <img
                         src={"/img/logo/logo.png"}
-                        alt="BigTech Logo"
+                        alt="fidarzi Logo"
                         title=""
                       />
                     </Link>

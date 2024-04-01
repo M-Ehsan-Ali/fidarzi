@@ -1,21 +1,20 @@
-import React from "react";
-import PageLoader from "../components/PageLoader/PageLoader";
+import HeaderTwo from "@/components/Header/HeaderTwo";
 import cn from "classnames";
-import HeaderTwo from "../components/Header/HeaderTwo";
-import FooterTwo from "../components/Footer/FooterTwo";
+import FooterOne from "../components/Footer/FooterOne";
+import PageLoader from "../components/PageLoader/PageLoader";
 
-const LayoutTwo = (props) => {
+const LayoutOne = ({ children }) => {
   return (
-    <div className={cn("white-background")}>
+    <div className={cn("")}>
       <PageLoader />
 
       <HeaderTwo />
 
-      {props.children}
+      {children}
 
-      <FooterTwo />
+      <FooterOne />
     </div>
   );
 };
 
-export default LayoutTwo;
+export default LayoutOne;

@@ -1,4 +1,3 @@
-import React from "react";
 import Link from "next/link";
 
 const FooterThree = () => {
@@ -15,8 +14,8 @@ const FooterThree = () => {
                   </Link>
                   <div className="footer-content">
                     <p>
-                      A new way to make the payments easy, reliable and 100%
-                      secure. claritatem itamconse quat. Exerci tationulla
+                      Building a True Community First, Not Corporation First
+                      Platform.
                     </p>
                     <ul className="footer-social">
                       <li>

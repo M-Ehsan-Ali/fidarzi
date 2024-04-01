@@ -1,4 +1,3 @@
-import React from "react";
 import Link from "next/link";
 
 const WhyChooseUsItem = (props) => {
@@ -13,6 +12,7 @@ const WhyChooseUsItem = (props) => {
         </h2>
         <p>{props.item.description}</p>
       </div>
+      {props.item.btn && <button className="btn mt-4">{props.item.btn}</button>}
     </div>
   );
 };

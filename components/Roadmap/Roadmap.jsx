@@ -1,108 +1,50 @@
-import { useHorizontalScroll } from "@/lib/hooks/useHorizontalScroll";
-import React from "react";
-import RoadmapItem from "./RoadmapItem";
+import VipIdo from "../VIPIDO/VipIdo";
 
 const Roadmap = () => {
-  const roadmap_items = [
-    {
-      roadmapTitle: "Mid of Q4 2021",
-      title: "Concept",
-      info: [
-        "EVM support for parthians",
-        "SubQuery Academy",
-        "Proof of indexing",
-      ],
-    },
-    {
-      roadmapTitle: "Mid of Q4 2021",
-      title: "Research",
-      info: [
-        "SubQuery Builders/Grants Program",
-        "SQT Network contract internal MVP",
-        "Coordinator and client SDK",
-      ],
-    },
-
-    {
-      roadmapTitle: "Mid of Q4 2021",
-      title: "App beta test",
-      info: [
-        "Public testnet launch",
-        "SubQuery Network Explorer and dApp",
-        "Point-in-time indexing",
-      ],
-    },
-
-    {
-      roadmapTitle: "Mid of Q4 2021",
-      title: "Token Test",
-      info: [
-        "SQT token generation event",
-        "Public incentivize testnet launch",
-        "Data traffic insights and reporting",
-      ],
-    },
-    {
-      roadmapTitle: "Mid of Q4 2021",
-      title: "Alpha Test",
-      info: [
-        "Launch of the SubQuery Foundation",
-        "Finalise research for other Layer-1 chains",
-        "Liquidity mining program",
-      ],
-    },
-    {
-      roadmapTitle: "Mid of Q4 2021",
-      title: "Benefits",
-      info: [
-        "Mainnet launch",
-        "Centralized exchange launch",
-        "Public incentivize testnet",
-      ],
-    },
-    {
-      roadmapTitle: "Mid of Q4 2021",
-      title: "Operational",
-      info: [
-        <>
-          SubQuery launches its <br /> own parthian
-        </>,
-        "SubQuery Foundation",
-      ],
-    },
-  ];
-
-  const scrollRef = useHorizontalScroll();
-
   return (
     <section id="roadmap" className="roadmap-area pt-130 pb-130">
       <div className="container custom-container-two">
         <div className="row justify-content-center">
           <div className="col-xl-5 col-lg-8">
             <div className="section-title text-center mb-60">
-              <span className="sub-title">OUr Roadmap</span>
-              <h2 className="title">
-                Bigtech Strategy and <br /> Project <span>Plan</span>
-              </h2>
+              <img src="/img/images/cropped-for-SEO-front-logo.png" alt="" />
             </div>
           </div>
         </div>
-
-        <div className="row">
-          <div className="col-lg-12">
-            <div
-              className="bt-roadmap_x bt-roadmap-scrollbar"
-              ref={scrollRef}
-              style={{ overflow: "auto" }}
-            >
-              <div className="bt-roadmap-wrap">
-                {roadmap_items.map((x, index) => (
-                  <RoadmapItem key={index} item={x} />
-                ))}
-              </div>
-            </div>
-          </div>
+        <div className="section-title text-center mb-5">
+          <h4 className="section-link mb-3">
+            The Fidarzi Community is the core of the ecosystem and plans to
+            create a community built on TRUST. We believe the world is changing,
+            and we are seeing a move from “corporation first” to “community
+            first.”
+          </h4>
         </div>
+        <div className="section-title text-center mb-5">
+          <h2 className="section-link mb-3">
+            Early VIP Private Pre-Sale @ $0.004 USD replace with below
+          </h2>
+          <p className="section-title mb-3">
+            We’re offering an Early Adopter Bonus for participants in our Early
+            VIP Private Pre-Sale, a token of appreciation for those who help lay
+            the project’s foundation. This sale is an exclusive opportunity for
+            our initial community, built and invited by our community leaders.
+          </p>
+          <p className="section-title mb-3">
+            Holding Foundation Tokens not only grants a share in transaction
+            fees but also eligibility for monthly bonuses, emphasizing our
+            gratitude and the value we see in our early supporters.
+          </p>
+          <h6 className="section-title mb-3">
+            Special Offer for Foundation Members
+          </h6>
+          <p className="section-title">
+            Foundation members spending up to $2000 USD in this sales round will
+            receive a complimentary Metal VIP Card, with annual fees waived, as
+            a token of our appreciation for their support.
+          </p>
+          <button className="btn">NEW SALES CONTRACT</button>
+        </div>
+        <VipIdo />
       </div>
     </section>
   );

@@ -1,15 +1,13 @@
-import { useEffect, useState } from "react";
-import { ethers } from "ethers";
-import CustomInputSelect from "./CustomInputSelect";
 import {
   addTokenToMM,
   connectWallet,
   getFiziAmountForBNB,
   getPrice,
   instanciateContract,
-  provide,
   purchaseFizi,
-} from "@/pages/contracts/walletConnect";
+} from "@/lib/contracts/walletConnect";
+import { useEffect, useState } from "react";
+import CustomInputSelect from "./CustomInputSelect";
 
 const ContactOneForm = () => {
   const [isMobile, setIsMobile] = useState(false);
