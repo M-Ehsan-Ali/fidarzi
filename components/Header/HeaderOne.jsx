@@ -161,7 +161,11 @@ const HeaderOne = () => {
                         </Link>
                       </li>
                       <li>
-                        <Link href="#" className={"section-link"}>
+                        <Link
+                          href="https://fidarzi.com/wp-content/uploads/2024/03/FID0001-Whitepaper-V1-2.pdf"
+                          target="_blank"
+                          className={"section-link"}
+                        >
                           Whitepaper
                         </Link>
                       </li>

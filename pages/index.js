@@ -1,4 +1,5 @@
 import Banner from "@/components/Banner/Banner";
+import ContactOneForm from "@/components/Contact/ContactOneForm";
 import LayoutOne from "@/layouts/LayoutOne";
 import Head from "next/head";
 
@@ -14,6 +15,7 @@ export default function Index() {
         <main className="fix mb-5">
           <Banner />
         </main>
+        <ContactOneForm />
       </LayoutOne>
     </>
   );
